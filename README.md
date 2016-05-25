@@ -2,6 +2,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/laravel-soft/jer/version)](https://packagist.org/packages/laravel-soft/jer)
 [![Build Status](https://travis-ci.org/thanh-taro/laravel-jer.svg?branch=master)](https://travis-ci.org/thanh-taro/laravel-jer)
+[![Coverage Status](https://coveralls.io/repos/github/thanh-taro/laravel-jer/badge.svg)](https://coveralls.io/github/thanh-taro/laravel-jer)
 [![Total Downloads](https://poser.pugx.org/laravel-soft/jer/downloads)](https://packagist.org/packages/laravel-soft/jer)
 [![License](https://poser.pugx.org/laravel-soft/jer/license)](https://packagist.org/packages/laravel-soft/jer)
 
@@ -48,4 +49,4 @@ class Handler extends ExceptionHandler
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT).

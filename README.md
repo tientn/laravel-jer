@@ -35,9 +35,10 @@ php artisan vendor:publish
 ## Usage
 
 In the `app\Exceptions\Handler.php`, let the class extends `Laravel\JER\ExceptionHandler`.
-use Laravel\JER\ExceptionHandler;
 
 ``` php
+use Laravel\JER\ExceptionHandler;
+
 class Handler extends ExceptionHandler
 {
   // ...

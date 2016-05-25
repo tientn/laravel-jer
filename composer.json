@@ -1,6 +1,7 @@
 {
     "name": "laravel-soft/jer",
     "description": "A laravel package for structing API exception response in JSON followed http://jsonapi.org/",
+    "license": "MIT",
     "authors": [{
         "name": "Nguyen Tri Thanh",
         "email": "thanhnt1@greenglobal.vn"

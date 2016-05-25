@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/laravel-soft/jer/version)](https://packagist.org/packages/laravel-soft/jer)
 [![Build Status](https://travis-ci.org/thanh-taro/laravel-jer.svg?branch=master)](https://travis-ci.org/thanh-taro/laravel-jer)
 [![Total Downloads](https://poser.pugx.org/laravel-soft/jer/downloads)](https://packagist.org/packages/laravel-soft/jer)
-[![License](https://poser.pugx.org//laravel-soft/jer/license)](https://packagist.org/packages/laravel-soft/jer)
+[![License](https://poser.pugx.org/laravel-soft/jer/license)](https://packagist.org/packages/laravel-soft/jer)
 
 A laravel package for structing API exception response in JSON followed http://jsonapi.org/.
 

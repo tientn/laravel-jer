@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\JER;
+namespace LaravelSoft\JER;
 
 use GrahamCampbell\TestBench\AbstractPackageTestCase;
 

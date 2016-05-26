@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\JER;
+namespace LaravelSoft\JER;
 
 use Exception;
 use Symfony\Component\HttpFoundation\Response;
@@ -8,8 +8,6 @@ use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
-
-defined('API_VERSION') or define('API_VERSION', 'v1.0.0');
 
 trait ExceptionHandlerTrait
 {
@@ -19,52 +17,55 @@ trait ExceptionHandlerTrait
         450, 500, 501, 502, 503, 504, 505, 506, 507, 509, 510,
     ];
 
+    public $jsonapiVersion = 'v1.0.0';
+
     /**
      * Render an exception into a response.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Exception               $e
+     * @param \Exception               $exception
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function render($request, Exception $e)
+    public function render($request, Exception $exception)
     {
-        $data = $this->getExceptionData($e);
+        // dd($exception);
+        $data = $this->getExceptionData($exception);
         if ($data !== false) {
-            return $this->makeResponse($e, $data[1], $data[0], $data[2]);
+            return $this->makeResponse($exception, $data[1], $data[0], $data[2]);
         }
 
-        return $this->getResponse($e);
+        return $this->getResponse($exception);
     }
 
     /**
-     * Get exception response data.
+     * Get exception response data. Return false for default handler
      *
-     * @param \Exception $e
+     * @param \Exception $exception
      *
      * @return array|false
      */
-    protected function getExceptionData(Exception $e)
+    protected function getExceptionData(Exception $exception)
     {
         $status = 500;
         $content = null;
         $headers = [];
-        if ($e instanceof TokenMismatchException) {
+        if ($exception instanceof TokenMismatchException) {
             $status = 406;
             $content = [
-                'title' => trans('jer::token_mismatch.title'),
-                'detail' => trans('jer::token_mismatch.detail'),
+                'title' => trans('laravel-soft-jer::messages.token_mismatch.title'),
+                'detail' => trans('laravel-soft-jer::messages.token_mismatch.detail'),
             ];
-        } elseif ($e instanceof ValidationException) {
+        } elseif ($exception instanceof ValidationException) {
             $status = 400;
-            $messages = $e->validator->messages();
+            $messages = $exception->validator->messages();
             $content = [
                 'code' => '2',
-                'title' => $e->getMessage(),
-                'detail' => empty($messages) ? $e->getMessage() : $messages->first(),
+                'title' => $exception->getMessage(),
+                'detail' => empty($messages) ? $exception->getMessage() : $messages->first(),
                 'source' => $messages->toArray(),
             ];
-        } elseif ($e instanceof AuthorizationException) {
+        } elseif ($exception instanceof AuthorizationException) {
             $status = 401;
         } else {
             return false;
@@ -76,14 +77,14 @@ trait ExceptionHandlerTrait
     /**
      * Get response of an exception.
      *
-     * @param \Exception $e
+     * @param \Exception $exception
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function getResponse(Exception $e)
+    protected function getResponse(Exception $exception)
     {
-        $status = method_exists($e, 'getCode') ? $e->getCode() : (method_exists($e, 'getStatusCode') ? $e->getStatusCode() : 500);
-        $message = $e->getMessage();
+        $status = method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : (method_exists($exception, 'getCode') ? $exception->getCode() : 500);
+        $message = $exception->getMessage();
         $content = [];
         if (!empty($message) && is_string($message)) {
             $content = [
@@ -92,17 +93,17 @@ trait ExceptionHandlerTrait
             ];
         }
 
-        return $this->makeResponse($e, $content, $status);
+        return $this->makeResponse($exception, $content, $status);
     }
 
     /**
      * Make response.
      *
-     * @param \Exception $e
+     * @param \Exception $exception
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function makeResponse(Exception $e, $content, $status, $headers = [])
+    protected function makeResponse(Exception $exception, $content, $status, $headers = [])
     {
         if (!in_array($status, static::$HTTP_STATUS_CODES)) {
             $status = 500;
@@ -112,18 +113,18 @@ trait ExceptionHandlerTrait
         } else {
             $temp = [
                 'status' => strval($status),
-                'title' => trans("jer::messages.$status.title"),
-                'detail' => trans("jer::messages.$status.detail"),
+                'title' => trans("laravel-soft-jer::messages.$status.title"),
+                'detail' => trans("laravel-soft-jer::messages.$status.detail"),
             ];
             $content = empty($content) ? $temp : array_merge($temp, $content);
             if ($status >= 200 && $status < 300) {
-                $content = array_merge(static::getJsonapi(), ['data' => $content]);
+                $content = array_merge($this->getJsonapi(), ['data' => $content]);
             } else {
-                $content = array_merge(static::getJsonapi(), ['errors' => $content]);
+                $content = array_merge($this->getJsonapi(), ['errors' => $content]);
             }
         }
         $response = new JsonResponse($content, $status, $headers);
-        $response->exception = $e;
+        $response->exception = $exception;
 
         return $response;
     }
@@ -133,11 +134,11 @@ trait ExceptionHandlerTrait
      *
      * @return array
      */
-    protected static function getJsonapi()
+    protected function getJsonapi()
     {
         return [
             'jsonapi' => [
-                'version' => API_VERSION,
+                'version' => $this->jsonapiVersion,
             ],
         ];
     }

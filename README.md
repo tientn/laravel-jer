@@ -22,7 +22,7 @@ Once this has finished, you will need to add the service provider to the provide
 ``` php
 'providers' => [
     // ...
-    Laravel\JER\JERServiceProvider::class,
+    LaravelSoft\JER\JERServiceProvider::class,
 ]
 ```
 
@@ -35,10 +35,10 @@ php artisan vendor:publish
 
 ## Usage
 
-In the `app\Exceptions\Handler.php`, let the class extends `Laravel\JER\ExceptionHandler`.
+In the `app\Exceptions\Handler.php`, let the class extends `LaravelSoft\JER\ExceptionHandler`.
 
 ``` php
-use Laravel\JER\ExceptionHandler;
+use LaravelSoft\JER\ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {

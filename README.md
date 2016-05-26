@@ -2,7 +2,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/laravel-soft/jer/version)](https://packagist.org/packages/laravel-soft/jer)
 [![Build Status](https://travis-ci.org/thanh-taro/laravel-jer.svg?branch=master)](https://travis-ci.org/thanh-taro/laravel-jer)
-[![Coverage Status](https://coveralls.io/repos/github/thanh-taro/laravel-jer/badge.svg)](https://coveralls.io/github/thanh-taro/laravel-jer)
+[![Coverage Status](https://coveralls.io/repos/github/thanh-taro/laravel-jer/badge.svg?brand=master)](https://coveralls.io/github/thanh-taro/laravel-jer?brand=master)
 [![Total Downloads](https://poser.pugx.org/laravel-soft/jer/downloads)](https://packagist.org/packages/laravel-soft/jer)
 [![License](https://poser.pugx.org/laravel-soft/jer/license)](https://packagist.org/packages/laravel-soft/jer)
 

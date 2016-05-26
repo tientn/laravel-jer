@@ -12,19 +12,17 @@
     },
     "require-dev": {
         "phpunit/phpunit": "4.*",
-        "fzaninotto/faker": "^1.6",
         "graham-campbell/testbench": "^3.1",
-        "mockery/mockery": "^0.9.4",
         "phpunit/phpunit": "^4.8|^5.0"
     },
     "autoload": {
         "psr-4": {
-            "Laravel\\JER\\": "src"
+            "LaravelSoft\\JER\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Laravel\\JER\\": "test"
+            "LaravelSoft\\JER\\": "test"
         }
     },
     "scripts": {

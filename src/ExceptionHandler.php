@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\JER;
+namespace LaravelSoft\JER;
 
 use Illuminate\Foundation\Exceptions\Handler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
